@@ -1,0 +1,28 @@
+* { border: 1px solid black; }
+
+body{
+ 
+}
+header {
+  display: flex;
+  background-color: white;
+}
+
+header a {
+ 
+  font-size: 30px;
+  padding: 14px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+
+
+}
+header p{
+  text-align: end;
+  padding: 14px 25px;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  font-size: 30px;
+}
