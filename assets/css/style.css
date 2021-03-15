@@ -1,28 +1,71 @@
-* { border: 1px solid black; }
+/* * { border: 1px solid black; } */
+:root {
+  --pColor: indigo;
 
-body{
- 
 }
+
+
 header {
   display: flex;
+  justify-content: space-between;
   background-color: white;
+  padding: 0px 0px 50px 0px;
 }
 
-header a {
- 
-  font-size: 30px;
+
+.highScore{
+  text-align: center;
+  margin: 0;
+  padding: 14px 25px;
+  font-size: 20px;
+  text-decoration: none;
+}
+.highScore:hover{
+  text-decoration: underline;
+}
+
+.timerDisplay{
+  font-size: 20px;
   padding: 14px 25px;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-
-
+  margin: 0;
 }
-header p{
-  text-align: end;
-  padding: 14px 25px;
-  display: inline-block;
-  text-decoration: none;
-  text-align: center;
+
+
+body div{
+  display: flex;
+  flex-direction: column; 
+}
+.button{
+  background-color: rebeccapurple;
+  color: rgb(255, 255, 255);
+  border: 2px solid black ;
+  font-size: 20px;
+  margin: 4px 40%;
+  width: auto;
+  border-radius: 4px;
+}
+.button:hover{
+  opacity: 0.8;
+}
+.button:
+#Answers{
+  display: none;
+}
+
+#questionsText{
   font-size: 30px;
+  margin: auto;
+  text-align: center;
+  padding: 0px 250px;
 }
+
+.answerOutcome{
+  margin: 0px 30%;
+  padding: 10px;
+  border-top: 2px solid gray;
+
+}
+
+
+

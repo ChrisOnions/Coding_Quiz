@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/reset.cs">
+    <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="javascript" href="./assets/js/JavaScript.js">
-    
+
     <title>Document</title>
 </head>
 
-<header>    
-<a href="#">View Highscores</a>
-<p>Time Remaing:</p>
+<header>
+    <a class="highScore" href="#">View Highscores</a>
+    <p class="timerDisplay">Timer:</p>
 </header>
 
 <body>
 
-    <div>
-
+    <div id="questionsAnswersWrapper">
+        <p id="questionsText">
+            Welcome to the FullStack quiz press play to start you will be tested on your knolwedge of coding To answer
+            the questions click play to start
+        </p>
     </div>
-    
+    <div id="answerButtons">
+        <button class="button" id="navButton">Play</button>
+        <button class="button" id="Answers">2. button 2 text</button>
+        <button class="button" id="Answers"> 3. button 3 text</button>
+        <button class="button" id="Answers">4. button 4 text</button>
+    </div>
+
+    <p class="answerOutcome">Correct</p>
+
 </body>
+
 </html>
