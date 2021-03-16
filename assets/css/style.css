@@ -36,12 +36,13 @@ body div{
   display: flex;
   flex-direction: column; 
 }
+
 .button{
   background-color: rebeccapurple;
   color: rgb(255, 255, 255);
   border: 2px solid black ;
   font-size: 20px;
-  margin: 4px 40%;
+  margin: 0 auto;
   width: auto;
   border-radius: 4px;
 }
@@ -50,17 +51,16 @@ body div{
 }
 
 
-#Answers{
-  display: none;
-}
-
 #questionsText{
   font-size: 30px;
-  margin: auto;
+  margin: 0 auto;
   text-align: center;
-  padding: 0px 250px;
+  padding: 25px;
 }
 
+#answerButtons{
+  align-items: flex-start;
+}
 .answerOutcome{
   margin: 0px 30%;
   padding: 10px;
