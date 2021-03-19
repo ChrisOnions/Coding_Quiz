@@ -5,8 +5,9 @@ var highScore = document.querySelector(".highscore");
 var answerButtonsElem = document.querySelector("#answerButtons");
 var playButton = document.querySelector(".playButton");
 
-var timercountRemaining = 1000
+var timercountRemaining = 30
 var scoreTotalElem = 0
+
 
 
 var questionArray = [
@@ -49,13 +50,8 @@ function askQuestions() {
   questionDisplay.textContent = questionArray[currentIndex].question
   // event listener to see click events
   answerButtonsElem.addEventListener("click", function (event) {
-    console.dir(questionArray.length - 1);
-    console.log(currentIndex)
-    // check answer using the funtions 
-
+    // check answer using the funtion 
     checkAnswer();
-
-
 
     function checkAnswer() {
       // if the index matches run the next if ... if not game over
@@ -67,6 +63,8 @@ function askQuestions() {
           currentIndex++
           generateButtons();
           console.log("generating correct buttons")
+          highScore = highScore + timercountRemaining
+
         }
         else {
 
@@ -74,12 +72,13 @@ function askQuestions() {
           currentIndex++
           generateButtons();
           console.log("generating failure buttons")
+          highScore = highScore / 2
+
         }
       }
       else {
-        questionDisplay.setAttribute("class", "hideButton");
-        answerButtonsElem.setAttribute("class", "hideButton");
-        gameOver();
+        //set timer interval after all questions have been asked to 1 so game timer ends and funs game over funtion
+        timercountRemaining = 1
       }
     }
   });
@@ -104,7 +103,7 @@ function countDownTimer() {
     timercountRemaining--;
     timercount.textContent = timercountRemaining;
 
-    if (timercountRemaining === 0) {
+    if (timercountRemaining <= 0) {
       clearInterval(timerInterval);
       gameOver();
     }
@@ -112,14 +111,43 @@ function countDownTimer() {
 };
 
 function gameOver() {
-  var buttonElem = document.createElement("div")
-  buttonElem.setAttribute("class", "navButton");
-  buttonElem.textContent = "Game over"
-  console.log("gameover")
-  console.log(playButton)
-  playButton.appendChild(buttonElem)
+  // if game over funtion is run timer count remaing stops and sets to 0
+  timercountRemaining = 1
 
+  questionDisplay.setAttribute("class", "hideButton");
+  answerButtonsElem.setAttribute("class", "hideButton");
+  endGameScreen();
 };
+
+function endGameScreen() {
+  var GameOverElm = document.createElement("div")
+  GameOverElm.setAttribute("id", "questionsText");
+  GameOverElm.textContent = "Game over please enter your name and submit to see high scores"
+  playButton.appendChild(GameOverElm)
+
+  var showScore = document.createElement("p")
+  showScore.setAttribute("class", "form-input")
+  showScore.textContent = "Your Score is " + highScore
+  playButton.appendChild(showScore)
+  console.log(highScore)
+
+  var nameInput = document.createElement("input")
+  nameInput.setAttribute("type", "text")
+  nameInput.setAttribute("class", "form-input")
+  nameInput.setAttribute("placeholder", "Please enter name")
+  playButton.appendChild(nameInput)
+
+  var submit = document.createElement("button")
+  submit.setAttribute("class", "navButton")
+  submit.textContent = "Submit"
+  playButton.appendChild(submit)
+
+  submit.addEventListener("click"), function () {
+
+  }
+}
+
+
 
 // listen for click of the play button 
 navButton.addEventListener("click", function () {
@@ -129,35 +157,12 @@ navButton.addEventListener("click", function () {
 
 });
 
+
+
 // stop propogation in nav button EL
 // stlye hide function css
 // event.target.textContent
 
-
-
-
-// navButton.addEventListener("click", function (event) {
-//   generateButtons();
-//   if (questionArray.question[i] === questionArray.question.answer) {
-//     console.log("correct")
-//   } else {
-//     console.log("incorrect")
-//   }
-//   console.log("Event listener")
-// });
-
-// when start game button clicked 
-//     start timer function
-//     style page
-//     pull questions and answers from Object
-//     insert questions & answers on page
-//     wait for click  
-//     create buttons on click 
-//        check answer function
-
-// function for timer
-//   count for timer
-//   if timer == 0 stop program 
 
 // on click check if answers match 
 //   stop timer
