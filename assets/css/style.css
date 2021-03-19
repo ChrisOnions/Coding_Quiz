@@ -37,7 +37,7 @@ body div{
   flex-direction: column; 
 }
 
-#navButton{
+.navButton{
   background-color: rebeccapurple;
   color: rgb(255, 255, 255);
   border: 2px solid black ;
@@ -46,7 +46,7 @@ body div{
   width: 100px;
   border-radius: 4px;
 }
-#button:hover{
+.navButton:hover{
   opacity: 0.8;
 }
 
@@ -62,10 +62,16 @@ body div{
   align-items: flex-start;
 }
 .answerOutcome{
+  
+  display: none;
   margin: 0px 30%;
   padding: 10px;
   border-top: 2px solid gray;
 
+}
+.hideButton
+{
+  display: none;
 }
 
 

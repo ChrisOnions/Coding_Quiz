@@ -1,26 +1,29 @@
 var timercount = document.querySelector("#timerDisplay");
 var questionDisplay = document.querySelector("#questionsText");
-var navButton = document.querySelector("#navButton");
+var navButton = document.querySelector(".navButton");
 var highScore = document.querySelector(".highscore");
 var answerButtonsElem = document.querySelector("#answerButtons");
+var playButton = document.querySelector(".playButton");
 
-var timercountRemaining = 4
+var timercountRemaining = 1000
+var scoreTotalElem = 0
+
 
 var questionArray = [
   {
     question: "what bla bla bla",
-    options: ["choice A", "choice B ", " choice C ", " choice D "],
-    answer: "choice a"
+    options: ["choice A", "choice B", "choice C", "choice D"],
+    answer: "choice A"
   },
   {
-    question: "what la di ad",
-    options: ["choice a", " button ", " no button", " no button"],
+    question: "what la di da",
+    options: ["choice a", "choice c", "no button", "no button"],
     answer: "choice c"
 
   },
   {
     question: "what waa waa waaa",
-    options: ["choice a", " button ", " no button", " no button"],
+    options: ["choice a", " button ", " no button", " choice d"],
     answer: "choice d"
 
   }
@@ -38,26 +41,58 @@ function askQuestions() {
   //referance the inner html and removes the play button
   answerButtonsElem.innerHTML = ""
 
+  var currentIndex = [0]
+  var answer = [2]
 
-  //for loop iterating over items in questionsArray
-  for (var i = 0; i < questionArray.length; i++) {
-    generateButtons()
-    questionDisplay.textContent = questionArray[i].question
+  generateButtons();
+  //set the text contenet to be the index of the questions array
+  questionDisplay.textContent = questionArray[currentIndex].question
+  // event listener to see click events
+  answerButtonsElem.addEventListener("click", function (event) {
+    console.dir(questionArray.length - 1);
+    console.log(currentIndex)
+    // check answer using the funtions 
 
-    function generateButtons() {
-      for (var j = 0; j < questionArray[i].options.length; j++) {
-
-        var buttonElem = document.createElement("button")
-        console.log("button created")
-        buttonElem.setAttribute("id", "#navButton");
-        console.log("button given attrubute nav")
-        buttonElem.textContent = questionArray[i].options[j]
-        console.log("button passed value")
-        answerButtonsElem.appendChild(buttonElem)
-        console.log("button appended");
+    checkAnswer();
 
 
+
+    function checkAnswer() {
+      // if the index matches run the next if ... if not game over
+      if (currentIndex < questionArray.length - 1) {
+
+        if (event.target.textContent == questionArray[currentIndex].answer) {
+
+          answerButtonsElem.innerHTML = ""
+          currentIndex++
+          generateButtons();
+          console.log("generating correct buttons")
+        }
+        else {
+
+          answerButtonsElem.innerHTML = ""
+          currentIndex++
+          generateButtons();
+          console.log("generating failure buttons")
+        }
       }
+      else {
+        questionDisplay.setAttribute("class", "hideButton");
+        answerButtonsElem.setAttribute("class", "hideButton");
+        gameOver();
+      }
+    }
+  });
+
+  function generateButtons() {
+    for (var j = 0; j < questionArray[currentIndex].options.length; j++) {
+      var buttonElem = document.createElement("button")
+      buttonElem.setAttribute("class", "navButton buttonElem");
+      buttonElem.textContent = questionArray[currentIndex].options[j]
+      answerButtonsElem.appendChild(buttonElem)
+      questionDisplay.textContent = questionArray[currentIndex].question
+
+
     }
   }
 };
@@ -74,18 +109,32 @@ function countDownTimer() {
       gameOver();
     }
   }, 1000);
-}
+};
 
 function gameOver() {
-
+  var buttonElem = document.createElement("div")
+  buttonElem.setAttribute("class", "navButton");
+  buttonElem.textContent = "Game over"
   console.log("gameover")
+  console.log(playButton)
+  playButton.appendChild(buttonElem)
+
 };
 
 // listen for click of the play button 
-navButton.addEventListener("click", function (event) {
+navButton.addEventListener("click", function () {
 
   play_game();
+  navButton.setAttribute("class", "hideButton");
+
 });
+
+// stop propogation in nav button EL
+// stlye hide function css
+// event.target.textContent
+
+
+
 
 // navButton.addEventListener("click", function (event) {
 //   generateButtons();
