@@ -1,12 +1,15 @@
 var timercount = document.querySelector("#timerDisplay");
 var questionDisplay = document.querySelector("#questionsText");
 var navButton = document.querySelector(".navButton");
+var playButton = document.querySelector(".playButton");
 var highScore = document.querySelector(".highscore");
 var answerButtonsElem = document.querySelector("#answerButtons");
 var playButton = document.querySelector(".playButton");
-
+var formInputVar = document.querySelector(".formInput")
 var timercountRemaining = 30
 var scoreTotalElem = 0
+
+
 
 
 
@@ -62,8 +65,9 @@ function askQuestions() {
           answerButtonsElem.innerHTML = ""
           currentIndex++
           generateButtons();
-          console.log("generating correct buttons")
+
           highScore = highScore + timercountRemaining
+          console.log(highScore)
 
         }
         else {
@@ -78,6 +82,7 @@ function askQuestions() {
       }
       else {
         //set timer interval after all questions have been asked to 1 so game timer ends and funs game over funtion
+        highScore = highScore + timercountRemaining
         timercountRemaining = 1
       }
     }
@@ -90,8 +95,6 @@ function askQuestions() {
       buttonElem.textContent = questionArray[currentIndex].options[j]
       answerButtonsElem.appendChild(buttonElem)
       questionDisplay.textContent = questionArray[currentIndex].question
-
-
     }
   }
 };
@@ -123,56 +126,73 @@ function endGameScreen() {
   var GameOverElm = document.createElement("div")
   GameOverElm.setAttribute("id", "questionsText");
   GameOverElm.textContent = "Game over please enter your name and submit to see high scores"
-  playButton.appendChild(GameOverElm)
+  formInputVar.appendChild(GameOverElm)
 
   var showScore = document.createElement("p")
-  showScore.setAttribute("class", "form-input")
-  showScore.textContent = "Your Score is " + highScore
-  playButton.appendChild(showScore)
-  console.log(highScore)
+  showScore.setAttribute("class", "formInput ")
+  showScore.textContent = "Your Score is : " + highScore
+  formInputVar.appendChild(showScore)
 
   var nameInput = document.createElement("input")
   nameInput.setAttribute("type", "text")
-  nameInput.setAttribute("class", "form-input")
+  nameInput.setAttribute("class", "formInput")
   nameInput.setAttribute("placeholder", "Please enter name")
-  playButton.appendChild(nameInput)
+  formInputVar.appendChild(nameInput)
+
 
   var submit = document.createElement("button")
-  submit.setAttribute("class", "navButton")
+  submit.setAttribute("class", "navButton ")
   submit.textContent = "Submit"
-  playButton.appendChild(submit)
+  formInputVar.appendChild(submit)
 
-  submit.addEventListener("click"), function () {
 
-  }
+  submit.addEventListener("click", function (event) {
+
+    var newScore = {
+      "name": nameInput.value,
+      "score": highScore
+    }
+    var ScoreExistingVar = JSON.parse(localStorage.getItem("HighScore"))
+    if (!ScoreExistingVar) {
+      ScoreExistingVar = []
+    }
+    ScoreExistingVar.push(newScore);
+    localStorage.setItem("HighScore", JSON.stringify(ScoreExistingVar));
+
+    DisplayHighScores();
+
+
+    function DisplayHighScores() {
+      var indexCurrent = 0;
+
+      for (i = 0; i <= ScoreExistingVar.length; i++) {
+
+        formInputVar.innerHTML = ""
+        var displayAllHighscores = document.createElement("ul")
+        displayAllHighscores.setAttribute("class", "formInput")
+        displayAllHighscores.textContent = ScoreExistingVar[0]
+        formInputVar.appendChild(DisplayHighScores)
+
+      }
+
+      console.log(indexCurrent)
+    }
+  });
 }
 
 
 
+
 // listen for click of the play button 
-navButton.addEventListener("click", function () {
+playButton.addEventListener("click", function () {
 
   play_game();
-  navButton.setAttribute("class", "hideButton");
+  playButton.setAttribute("class", "hideButton");
 
 });
-
-
 
 // stop propogation in nav button EL
 // stlye hide function css
 // event.target.textContent
 
-
-// on click check if answers match 
-//   stop timer
-//   style window
-//   if corect display correct
-//   else incorrect 
-//   THEN time is subtracted from the clock
-//   WHEN all questions are answered or the timer reaches 0
-
-//   next question by index?
-
-//   endgame function
-
+// Add Questions feedback
