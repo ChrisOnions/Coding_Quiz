@@ -7,14 +7,14 @@ var answerButtonsElem = document.querySelector("#answerButtons");
 var playButton = document.querySelector(".playButton");
 var formInputVar = document.querySelector(".formInput")
 var clearScores = document.querySelector(".clearScores")
-
+var questionFeedback = document.querySelector(".questionFeedback")
 var timercountRemaining = 30
 var scoreTotalElem = 0
 
 
 
 
-
+//Array of qyestions to be asked 
 var questionArray = [
   {
     question: "what bla bla bla",
@@ -34,17 +34,16 @@ var questionArray = [
 
   }
 ]
-
+// play game function attatched to play button
 function play_game() {
   countDownTimer();
   askQuestions();
-
-  console.log("Playing");
+  console.log("Playing Game");
 };
 
 
 function askQuestions() {
-  //referance the inner html and removes the play button
+  //referance the inner html and removes the play button and text
   answerButtonsElem.innerHTML = ""
 
   var currentIndex = [0]
@@ -61,34 +60,30 @@ function askQuestions() {
     function checkAnswer() {
       // if the index matches run the next if ... if not game over
       if (currentIndex < questionArray.length - 1) {
-
+        // if the answer is correct or incorrect
         if (event.target.textContent == questionArray[currentIndex].answer) {
-
           answerButtonsElem.innerHTML = ""
           currentIndex++
           generateButtons();
           highScore = highScore + timercountRemaining
           console.log(highScore)
-
+          questionFeedback.textContent = "Correct";
         }
         else {
-
           answerButtonsElem.innerHTML = ""
           currentIndex++
           generateButtons();
-          console.log(highScore)
           highScore = highScore - 10
-          console.log(highScore)
-
+          questionFeedback.textContent = "Incorrect";
         }
       }
       else {
-        //set timer interval after all questions have been asked to 1 so game timer ends and funs game over funtion
+        //set timer interval after all questions have been asked to 1 so game timer ends and runs game over function
         timercountRemaining = 1
       }
     }
   });
-
+  // Generates answer buttons
   function generateButtons() {
     for (var j = 0; j < questionArray[currentIndex].options.length; j++) {
       var buttonElem = document.createElement("button")

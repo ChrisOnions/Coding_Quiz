@@ -72,8 +72,6 @@ body div{
   align-items: flex-start;
 }
 .answerOutcome{
-  
-  display: none;
   margin: 0px 30%;
   padding: 10px;
   border-top: 2px solid gray;
@@ -94,7 +92,6 @@ margin: 0 auto;
   margin: 0 400px;
   padding: 5px 0;
   text-align: start;
-
 }
 
 
