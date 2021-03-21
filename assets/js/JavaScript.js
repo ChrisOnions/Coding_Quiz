@@ -163,17 +163,23 @@ function endGameScreen() {
 
 
     function DisplayHighScores() {
-      var indexCurrent = 0;
-
+      formInputVar.innerHTML = ""
+      console.log(ScoreExistingVar.length)
+      console.log(ScoreExistingVar[0].name)
       for (i = 0; i <= ScoreExistingVar.length; i++) {
 
-        formInputVar.innerHTML = ""
-        var displayAllHighscores = document.createElement("ul")
-        displayAllHighscores.setAttribute("class", "formInput")
-        displayAllHighscores.textContent = ScoreExistingVar[0]
-        formInputVar.appendChild(DisplayHighScores)
 
+        var displayAllHighscores = document.createElement("ul")
+        displayAllHighscores.setAttribute("class", "scoresCurrent")
+        displayAllHighscores.textContent = "Name - " + ScoreExistingVar[i].name + "Score - " + ScoreExistingVar[i].score
+        formInputVar.appendChild(displayAllHighscores)
+        console.log(ScoreExistingVar.length - 1)
       }
+      var submit = document.createElement("button")
+      submit.setAttribute("class", "navButton")
+      submit.textContent = "Clear Scores"
+      formInputVar.appendChild(submit)
+
 
       console.log(indexCurrent)
     }
