@@ -6,6 +6,8 @@ var highScore = document.querySelector(".highscore");
 var answerButtonsElem = document.querySelector("#answerButtons");
 var playButton = document.querySelector(".playButton");
 var formInputVar = document.querySelector(".formInput")
+var clearScores = document.querySelector(".clearScores")
+
 var timercountRemaining = 30
 var scoreTotalElem = 0
 
@@ -65,7 +67,6 @@ function askQuestions() {
           answerButtonsElem.innerHTML = ""
           currentIndex++
           generateButtons();
-
           highScore = highScore + timercountRemaining
           console.log(highScore)
 
@@ -75,14 +76,14 @@ function askQuestions() {
           answerButtonsElem.innerHTML = ""
           currentIndex++
           generateButtons();
-          console.log("generating failure buttons")
-          highScore = highScore / 2
+          console.log(highScore)
+          highScore = highScore - 10
+          console.log(highScore)
 
         }
       }
       else {
         //set timer interval after all questions have been asked to 1 so game timer ends and funs game over funtion
-        highScore = highScore + timercountRemaining
         timercountRemaining = 1
       }
     }
@@ -164,24 +165,35 @@ function endGameScreen() {
 
     function DisplayHighScores() {
       formInputVar.innerHTML = ""
-      console.log(ScoreExistingVar.length)
-      console.log(ScoreExistingVar[0].name)
-      for (i = 0; i <= ScoreExistingVar.length; i++) {
 
+      for (i = 0; i <= ScoreExistingVar.length - 1; i++) {
 
         var displayAllHighscores = document.createElement("ul")
         displayAllHighscores.setAttribute("class", "scoresCurrent")
         displayAllHighscores.textContent = "Name - " + ScoreExistingVar[i].name + "Score - " + ScoreExistingVar[i].score
         formInputVar.appendChild(displayAllHighscores)
-        console.log(ScoreExistingVar.length - 1)
+
       }
-      var submit = document.createElement("button")
-      submit.setAttribute("class", "navButton")
-      submit.textContent = "Clear Scores"
-      formInputVar.appendChild(submit)
+
+      var playAgain = document.createElement("button")
+      playAgain.setAttribute("class", "navButton")
+      playAgain.textContent = "Play Again"
+      formInputVar.appendChild(playAgain)
+      var clearScores = document.createElement("button")
+      clearScores.setAttribute("class", "navButton clearScores")
+      clearScores.textContent = "Clear Scores"
+      formInputVar.appendChild(clearScores)
+
+      clearScores.addEventListener("click", function () {
+        ScoreExistingVar = []
+        window.localStorage.clear();
+        DisplayHighScores();
+        console.log(window.localStorage.HighScore)
+      });
 
 
-      console.log(indexCurrent)
+
+
     }
   });
 }
