@@ -16,8 +16,8 @@ var scoreTotalElem = 0
 var questionArray = [
   {
     question: "What is HTML short for?",
-    options: ["Hyper Text MarkDown Language  ", "Happy Text Markup Language", "Hyper Test Markup Language", "Header Test Markup Language"],
-    answer: "Hyper Test Markup Language"
+    options: ["Hyper Text MarkDown Language  ", "Happy Text Markup Language", "Hyper Text Markup Language", "Header Test Markup Language"],
+    answer: "Hyper Text Markup Language"
   },
   {
     question: "What does the this Keyword do? ",
