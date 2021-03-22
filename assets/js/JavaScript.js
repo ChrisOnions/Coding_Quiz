@@ -8,6 +8,9 @@ var playButton = document.querySelector(".playButton");
 var formInputVar = document.querySelector(".formInput")
 var clearScores = document.querySelector(".clearScores")
 var questionFeedback = document.querySelector(".questionFeedback")
+var viewHighScore = document.querySelector("#viewHighScore")
+
+
 var timercountRemaining = 30
 var scoreTotalElem = 0
 
@@ -80,6 +83,7 @@ function askQuestions() {
       else {
         //set timer interval after all questions have been asked to 1 so game timer ends and runs game over function
         timercountRemaining = 1
+        questionFeedback.innerHTML = ""
       }
     }
   });
@@ -155,8 +159,15 @@ function endGameScreen() {
     ScoreExistingVar.push(newScore);
     localStorage.setItem("HighScore", JSON.stringify(ScoreExistingVar));
 
-    DisplayHighScores();
 
+    if (nameInput.value == "") {
+      console.log("No Value")
+      alert("please enter a valid name");
+      event.preventDefault();
+    }
+    else {
+      DisplayHighScores();
+    }
 
     function DisplayHighScores() {
       formInputVar.innerHTML = ""
@@ -164,8 +175,8 @@ function endGameScreen() {
       for (i = 0; i <= ScoreExistingVar.length - 1; i++) {
 
         var displayAllHighscores = document.createElement("ul")
-        displayAllHighscores.setAttribute("class", "scoresCurrent")
-        displayAllHighscores.textContent = "Name - " + ScoreExistingVar[i].name + "Score - " + ScoreExistingVar[i].score
+        displayAllHighscores.setAttribute("class", "scoresCurrent ")
+        displayAllHighscores.textContent = "Name - " + ScoreExistingVar[i].name + " Score - " + ScoreExistingVar[i].score
         formInputVar.appendChild(displayAllHighscores)
 
       }
@@ -185,15 +196,48 @@ function endGameScreen() {
         DisplayHighScores();
         console.log(window.localStorage.HighScore)
       });
-
-
-
-
     }
   });
 }
+//High score event listener to show high scores
+
+viewHighScore.addEventListener("click", function (event) {
+  var ScoreExistingVar = JSON.parse(localStorage.getItem("HighScore"))
+
+  if (timercount > 1) {
+    clearInterval(timerInterval);
+  }
+  navButton.setAttribute("class", "hideButton")
+  formInputVar.innerHTML = ""
+  answerButtonsElem.innerHTML = ""
+  questionDisplay.innerHTML = ""
+
+  if (!ScoreExistingVar) {
+    alert("sorry no scores to display")
+  }
+
+  else {
+    for (i = 0; i <= ScoreExistingVar.length - 1; i++) {
+
+      var displayAllHighscores = document.createElement("ul")
+      displayAllHighscores.setAttribute("class", "scoresCurrent ")
+      displayAllHighscores.textContent = "Name - " + ScoreExistingVar[i].name + " Score - " + ScoreExistingVar[i].score
+      formInputVar.appendChild(displayAllHighscores)
+      event.preventDefault();
+
+    }
+  };
 
 
+  var playAgain = document.createElement("button")
+  playAgain.setAttribute("class", "navButton")
+  playAgain.textContent = "Play Again"
+  formInputVar.appendChild(playAgain)
+  var clearScores = document.createElement("button")
+  clearScores.setAttribute("class", "navButton clearScores")
+  clearScores.textContent = "Clear Scores"
+  formInputVar.appendChild(clearScores)
+});
 
 
 // listen for click of the play button 
@@ -204,8 +248,5 @@ playButton.addEventListener("click", function () {
 
 });
 
-// stop propogation in nav button EL
-// stlye hide function css
-// event.target.textContent
-
-// Add Questions feedback
+// Add actual questions 
+//
