@@ -44,7 +44,7 @@ function play_game() {
   console.log("Playing Game");
 };
 
-
+// Generated buttons and question
 function askQuestions() {
   //referance the inner html and removes the play button and text
   answerButtonsElem.innerHTML = ""
@@ -112,7 +112,7 @@ function countDownTimer() {
     }
   }, 1000);
 };
-
+// when game is over function that stops game
 function gameOver() {
   // if game over funtion is run timer count remaing stops and sets to 0
   timercountRemaining = 1
@@ -121,7 +121,7 @@ function gameOver() {
   answerButtonsElem.setAttribute("class", "hideButton");
   endGameScreen();
 };
-
+//Display end screen function
 function endGameScreen() {
   var GameOverElm = document.createElement("div")
   GameOverElm.setAttribute("id", "questionsText");
@@ -200,17 +200,15 @@ function endGameScreen() {
   });
 }
 //High score event listener to show high scores
-
 viewHighScore.addEventListener("click", function (event) {
   var ScoreExistingVar = JSON.parse(localStorage.getItem("HighScore"))
+  timercountRemaining = 1
 
-  if (timercount > 1) {
-    clearInterval(timerInterval);
-  }
   navButton.setAttribute("class", "hideButton")
-  formInputVar.innerHTML = ""
+
   answerButtonsElem.innerHTML = ""
   questionDisplay.innerHTML = ""
+
 
   if (!ScoreExistingVar) {
     alert("sorry no scores to display")
@@ -221,13 +219,13 @@ viewHighScore.addEventListener("click", function (event) {
 
       var displayAllHighscores = document.createElement("ul")
       displayAllHighscores.setAttribute("class", "scoresCurrent ")
-      displayAllHighscores.textContent = "Name - " + ScoreExistingVar[i].name + " Score - " + ScoreExistingVar[i].score
+      displayAllHighscores.textContent = "Name - " + ScoreExistingVar[i].name + " / Score - " + ScoreExistingVar[i].score
       formInputVar.appendChild(displayAllHighscores)
       event.preventDefault();
 
+
     }
   };
-
 
   var playAgain = document.createElement("button")
   playAgain.setAttribute("class", "navButton")
@@ -237,7 +235,15 @@ viewHighScore.addEventListener("click", function (event) {
   clearScores.setAttribute("class", "navButton clearScores")
   clearScores.textContent = "Clear Scores"
   formInputVar.appendChild(clearScores)
+
+  clearScores.addEventListener("click", function () {
+    ScoreExistingVar = []
+    window.localStorage.clear();
+    DisplayHighScores();
+    console.log(window.localStorage.HighScore)
+  });
 });
+
 
 
 // listen for click of the play button 
