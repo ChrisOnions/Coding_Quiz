@@ -26,15 +26,17 @@ This was written by me and only me
 
 Can be opened in any text editor workspace
 Please use google Chrome for optimum results
+## Example
+* Visual studio code
+* notepad++
+
 ## Challenges
 
 This was my first time using local storage, i learned alot about how it is stored and accessing the variables. I was struggling with pushing items to the local storage until i relised , I needed to retrieve them first before pushing additional values.
 
 I leared alot about local storage and am now quite profficent with it.
 
-## Example
-* Visual studio code
-* notepad++
+
 
 ## Pictures :
 ![404 image missing](./assets/Pics/titleScreen.JPG "Optional Title")
