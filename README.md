@@ -42,6 +42,7 @@ I leared alot about local storage and am now quite profficent with it.
 ![404 image missing](./assets/Pics/titleScreen.JPG "Optional Title")
 ![404 image missing](./assets/Pics/gamePlay.JPG "Optional Title")
 ![404 image missing](./assets/Pics/scoreScreen.JPG "Optional Title")
-
+#### Git hub
 https://github.com/ChrisOnions/Coding_Quiz
+#### Deployed link
 https://chrisonions.github.io/Coding_Quiz/
