@@ -9,13 +9,8 @@ var formInputVar = document.querySelector(".formInput")
 var clearScores = document.querySelector(".clearScores")
 var questionFeedback = document.querySelector(".questionFeedback")
 var viewHighScore = document.querySelector("#viewHighScore")
-
-
 var timercountRemaining = 60
 var scoreTotalElem = 0
-
-
-
 
 //Array of qyestions to be asked 
 var questionArray = [
@@ -100,7 +95,7 @@ function askQuestions() {
           answerButtonsElem.innerHTML = ""
           currentIndex++
           generateButtons();
-          highScore = highScore - 10
+          timercountRemaining = timercountRemaining - 10
           questionFeedback.textContent = "Incorrect";
         }
       }
@@ -122,7 +117,6 @@ function askQuestions() {
     }
   }
 };
-
 
 //Count down timer function
 function countDownTimer() {
@@ -271,8 +265,6 @@ viewHighScore.addEventListener("click", function (event) {
     console.log(window.localStorage.HighScore)
   });
 });
-
-
 
 // listen for click of the play button 
 playButton.addEventListener("click", function () {
