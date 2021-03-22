@@ -11,7 +11,7 @@ var questionFeedback = document.querySelector(".questionFeedback")
 var viewHighScore = document.querySelector("#viewHighScore")
 
 
-var timercountRemaining = 30
+var timercountRemaining = 60
 var scoreTotalElem = 0
 
 
@@ -20,20 +20,44 @@ var scoreTotalElem = 0
 //Array of qyestions to be asked 
 var questionArray = [
   {
-    question: "what bla bla bla",
-    options: ["choice A", "choice B", "choice C", "choice D"],
-    answer: "choice A"
+    question: "What is HTML short for?",
+    options: ["Hyper Text MarkDown Language  ", "Happy Text Markup Language", "Hyper Test Markup Language", "Header Test Markup Language"],
+    answer: "Hyper Test Markup Language"
   },
   {
-    question: "what la di da",
-    options: ["choice a", "choice c", "no button", "no button"],
-    answer: "choice c"
+    question: "What does the this Keyword do? ",
+    options: ["This is a reference variable that refers to the current object", "This is a reference variable that refers to the current variable", "This is a reference object that refers to the current object", "This is a reference object that refers to the current variable"],
+    answer: "This is a reference variable that refers to the current object"
 
   },
   {
-    question: "what waa waa waaa",
-    options: ["choice a", " button ", " no button", " choice d"],
-    answer: "choice d"
+    question: "Whats is the diference between == and === comparison operators in Java Script ",
+    options: ["One is a typo", "=== compares type and value == is just value", " == compares type and value === is just value", " more === more fun"],
+    answer: "=== compares type and value == is just value"
+
+  },
+  {
+    question: "What is jQuery?",
+    options: ["jQuery is a lightweight, write less, do more, JavaScript library", "jQuery is a Query on the j element ", " jQuery is a Function to run JavaScript ", " jQuery is a Class selector to select elemenets in css"],
+    answer: "jQuery is a lightweight, write less, do more, JavaScript library"
+
+  },
+  {
+    question: "what is git used for?",
+    options: ["Git is a CheatSheet used for learing JavaScript", "Git is Slang telling somone somthing", "Git used for Version control", " Git is a resource for attatching documents to html"],
+    answer: "Git used for Version control"
+
+  },
+  {
+    question: "When would i use a Wireframe",
+    options: ["When writing html document", " When hanging a picure ", "When planning basic structure a web page", " When choosing the correct css elements"],
+    answer: "When planning basic structure a web page"
+
+  },
+  {
+    question: "Choose the correct syntax",
+    options: ["var = x  0;", "var x = 0", "var 1 = 0;", "var x = 0;"],
+    answer: "var x = 0;"
 
   }
 ]
@@ -141,37 +165,40 @@ function endGameScreen() {
 
 
   var submit = document.createElement("button")
-  submit.setAttribute("class", "navButton ")
+  submit.setAttribute("class", "playButton ")
   submit.textContent = "Submit"
   formInputVar.appendChild(submit)
 
-
+  // Event to Submit name and score to Local storage
   submit.addEventListener("click", function (event) {
 
     var newScore = {
       "name": nameInput.value,
       "score": highScore
     }
+    //gets the current list and if no list creates one
     var ScoreExistingVar = JSON.parse(localStorage.getItem("HighScore"))
     if (!ScoreExistingVar) {
       ScoreExistingVar = []
     }
+    //adds New score to list
     ScoreExistingVar.push(newScore);
     localStorage.setItem("HighScore", JSON.stringify(ScoreExistingVar));
 
-
+    // checks to see if name has been enterd 
     if (nameInput.value == "") {
       console.log("No Value")
       alert("please enter a valid name");
       event.preventDefault();
     }
+    //if value enteted dispalys scores
     else {
       DisplayHighScores();
     }
 
     function DisplayHighScores() {
       formInputVar.innerHTML = ""
-
+      //iterates over all stored scores to display them in ul 
       for (i = 0; i <= ScoreExistingVar.length - 1; i++) {
 
         var displayAllHighscores = document.createElement("ul")
@@ -180,7 +207,7 @@ function endGameScreen() {
         formInputVar.appendChild(displayAllHighscores)
 
       }
-
+      //creates buttons for play again and clear scores
       var playAgain = document.createElement("button")
       playAgain.setAttribute("class", "navButton")
       playAgain.textContent = "Play Again"
@@ -190,6 +217,7 @@ function endGameScreen() {
       clearScores.textContent = "Clear Scores"
       formInputVar.appendChild(clearScores)
 
+      //clears the local storage resetting high scores    
       clearScores.addEventListener("click", function () {
         ScoreExistingVar = []
         window.localStorage.clear();
@@ -203,17 +231,17 @@ function endGameScreen() {
 viewHighScore.addEventListener("click", function (event) {
   var ScoreExistingVar = JSON.parse(localStorage.getItem("HighScore"))
   timercountRemaining = 1
-
-  navButton.setAttribute("class", "hideButton")
-
+  //sets the page blank to add new assets
+  playButton.setAttribute("class", "hideButton")
   answerButtonsElem.innerHTML = ""
   questionDisplay.innerHTML = ""
+  formInputVar.innerHTML = ""
 
-
+  // if no score to display Alert!
   if (!ScoreExistingVar) {
     alert("sorry no scores to display")
   }
-
+  // Displays all scores in ul 
   else {
     for (i = 0; i <= ScoreExistingVar.length - 1; i++) {
 
@@ -226,7 +254,7 @@ viewHighScore.addEventListener("click", function (event) {
 
     }
   };
-
+  // creates buttons to navigate  
   var playAgain = document.createElement("button")
   playAgain.setAttribute("class", "navButton")
   playAgain.textContent = "Play Again"
@@ -235,7 +263,7 @@ viewHighScore.addEventListener("click", function (event) {
   clearScores.setAttribute("class", "navButton clearScores")
   clearScores.textContent = "Clear Scores"
   formInputVar.appendChild(clearScores)
-
+  //clears the local storage resetting high scores
   clearScores.addEventListener("click", function () {
     ScoreExistingVar = []
     window.localStorage.clear();
@@ -254,5 +282,4 @@ playButton.addEventListener("click", function () {
 
 });
 
-// Add actual questions 
-//
+

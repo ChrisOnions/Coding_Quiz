@@ -39,11 +39,12 @@ body div{
 
 .navButton{
   background-color: rebeccapurple;
+  color: aqua;
   color: rgb(255, 255, 255);
   border: 2px solid black ;
   font-size: 20px;
-  margin: 0 auto;
-  width: 100px;
+  margin: 4px 30%;
+  width: auto;
   border-radius: 4px;
 }
 .playButton{
